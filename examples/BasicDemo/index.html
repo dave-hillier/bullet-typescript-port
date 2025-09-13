@@ -1,161 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bullet3 Basic Demo - TypeScript Port</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        
-        #demo-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-        
-        .error {
-            color: #ff6b6b;
-            background: rgba(255,0,0,0.1);
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-        
-        button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        
-        button:hover {
-            background: #45a049;
-        }
-        
-        button:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            z-index: 2000;
-        }
-        
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-    <div id="demo-container">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bullet3 Basic Demo - Vite + TypeScript</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="demo-container">
         <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <div>Loading Bullet3 Physics Engine...</div>
-            <div style="font-size: 12px; margin-top: 10px;">Compiling TypeScript modules...</div>
+          <div class="spinner"></div>
+          <div>Loading Bullet3 Physics Engine...</div>
+          <div class="loading-subtitle">Vite + TypeScript</div>
         </div>
+      </div>
     </div>
-
-    <script>
-        // Error handling
-        window.addEventListener('error', (event) => {
-            console.error('Runtime error:', event.error);
-            hideLoading();
-            showError(`Runtime Error: ${event.error?.message || 'Unknown error'}`);
-        });
-
-        window.addEventListener('unhandledrejection', (event) => {
-            console.error('Unhandled promise rejection:', event.reason);
-            hideLoading();
-            showError(`Promise Error: ${event.reason}`);
-        });
-
-        function hideLoading() {
-            const loading = document.getElementById('loading');
-            if (loading) {
-                loading.style.display = 'none';
-            }
-        }
-
-        function showError(message) {
-            const container = document.getElementById('demo-container');
-            if (container) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error';
-                errorDiv.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    max-width: 80%;
-                    z-index: 3000;
-                `;
-                errorDiv.innerHTML = `
-                    <h3>Error Loading Demo</h3>
-                    <p>${message}</p>
-                    <p><small>Check the browser console for detailed error information.</small></p>
-                    <button onclick="location.reload()">Reload Page</button>
-                `;
-                container.appendChild(errorDiv);
-            }
-        }
-
-        // Load the compiled demo
-        async function loadDemo() {
-            try {
-                console.log('Loading Bullet3 TypeScript Demo...');
-                
-                // Hide loading after the demo starts
-                setTimeout(hideLoading, 500);
-                
-                // The demo should automatically start when demo.js loads
-                console.log('Demo loaded successfully!');
-                
-            } catch (error) {
-                console.error('Failed to load demo:', error);
-                hideLoading();
-                showError(`Failed to initialize: ${error.message}`);
-            }
-        }
-
-        // Start loading when page is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadDemo);
-        } else {
-            loadDemo();
-        }
-    </script>
-    
-    <!-- Load the simple demo for testing -->
-    <script src="simple-demo.js"></script>
-</body>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

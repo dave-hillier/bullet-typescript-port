@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **work-in-progress** TypeScript port of the Bullet3 physics engine. The original C++ source is in `../bullet3` for reference only. The port follows a bottom-up approach, starting with leaf dependencies and building up to complex systems.
+This is a TypeScript port of the Bullet3 physics engine. The original C++ source is in `../bullet3` for reference only. The port follows a bottom-up approach, starting with leaf dependencies and building up to complex systems.
 
-**Current Status**: 🚧 Setting up project structure and starting with LinearMath foundation
+**Current Status**: ✅ Core physics engine ported and working with example demos using Vite + TypeScript
 
 ## Porting Strategy
 
@@ -19,9 +19,9 @@ This is a **work-in-progress** TypeScript port of the Bullet3 physics engine. Th
 
 ### Dependency Order (Leaf to Root)
 
-**Implementation Progress**: Currently focusing on step 1 (LinearMath Foundation)
+**Implementation Progress**: Core systems implemented, demos working
 
-1. **LinearMath Foundation** (🚧 **IN PROGRESS** - port first):
+1. **LinearMath Foundation** (✅ **COMPLETED**):
    - `btScalar` → TypeScript number types and math constants  
    - `btMinMax` → Simple min/max utilities
    - `btVector3` → 3D vector class (depends on btScalar)
@@ -30,14 +30,14 @@ This is a **work-in-progress** TypeScript port of the Bullet3 physics engine. Th
    - `btTransform` → Combined rotation and translation (depends on btMatrix3x3, btVector3)
    - `btAlignedObjectArray` → Use TypeScript arrays instead
 
-2. **BulletCollision System** (📋 **PLANNED** - port after LinearMath):
+2. **BulletCollision System** (✅ **CORE COMPLETED**):
    - **CollisionShapes/**: Start with basic shapes (`btSphereShape`, `btBoxShape`, `btCapsuleShape`)
    - **BroadphaseCollision/**: Broad phase collision detection algorithms  
    - **NarrowPhaseCollision/**: Narrow phase collision algorithms
    - **CollisionDispatch/**: Collision dispatching and management
    - **Gimpact/**: Triangle mesh collision (advanced)
 
-3. **BulletDynamics System** (📋 **PLANNED** - port after collision):
+3. **BulletDynamics System** (✅ **CORE COMPLETED**):
    - **Dynamics/**: Core rigid body dynamics (`btRigidBody`, `btDiscreteDynamicsWorld`)
    - **ConstraintSolver/**: Constraint solving algorithms
    - **Character/**: Character controller functionality
@@ -189,20 +189,48 @@ Each ported class must have:
 
 Test file naming: `[ClassName].test.ts` in the same directory
 
-## Build Commands
+## Development Environment
 
+This project uses **Vite + TypeScript** for modern development workflow with hot module replacement.
+
+### Examples and Demos
+
+All examples use Vite for optimal development experience:
+
+**`examples/BasicDemo/`** - Main physics demonstration
+- **125 rigid bodies** (5×5×5 falling boxes)  
+- **Ground collision** detection
+- **Real-time physics** simulation
+- **Interactive controls** (Start/Stop/Reset)
+- **Live monitoring** (FPS, object positions)
+
+To run any example:
 ```bash
-# Build TypeScript
-npm run build
+cd examples/BasicDemo
+npm install
+npm run dev    # Start development server with hot reload
+npm run build  # Build for production
+```
 
-# Run tests
-npm test
+### Build Commands
 
-# Run tests in watch mode
-npm run test:watch
+**Development:**
+```bash
+cd examples/BasicDemo
+npm run dev    # Vite dev server at http://localhost:3000
+```
 
-# Run tests with coverage
-npm run test:coverage
+**Production:**
+```bash
+npm run build  # TypeScript + Vite build
+npm run preview # Preview production build
+```
+
+**Testing:**
+```bash
+npm test       # Run unit tests
+npm test:watch # Run tests in watch mode
+npm test:coverage # Run tests with coverage
 ```
 
 ## Important Notes
