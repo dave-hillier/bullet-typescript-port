@@ -1,6 +1,11 @@
 /*
-Copyright (c) 2003-2009 Erwin Coumans  http://bullet.googlecode.com
+MODIFIED VERSION - TypeScript port of Bullet Physics Engine
+Original Copyright (c) 2003-2009 Erwin Coumans  http://bulletphysics.org
 
+This is a TypeScript port of the original Bullet Physics Engine C++ source code.
+This version has been substantially modified from the original.
+
+Original software license:
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
 Permission is granted to anyone to use this software for any purpose, 
