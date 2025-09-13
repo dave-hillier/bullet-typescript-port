@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../bullet3"
+		}
+	],
+	"settings": {}
+}

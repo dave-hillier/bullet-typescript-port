@@ -1,0 +1,375 @@
+filepath,description,refactoring_suggestion
+btBulletCollisionAll.cpp,Aggregation file including all BulletCollision sources,Skip - aggregation file not needed in TypeScript with proper module system
+btBulletCollisionCommon.h,Common includes/headers for BulletCollision system,Transform into TypeScript barrel export file (index.ts) for BulletCollision module
+btBulletDynamicsAll.cpp,Aggregation file including all BulletDynamics sources,Skip - aggregation file not needed in TypeScript with proper module system
+btBulletDynamicsCommon.h,Common includes/headers for BulletDynamics system,Transform into TypeScript barrel export file (index.ts) for BulletDynamics module
+btLinearMathAll.cpp,Aggregation file including all LinearMath sources,Skip - aggregation file not needed in TypeScript with proper module system
+Bullet3Collision/BroadPhaseCollision/b3BroadphaseCallback.h,GPU broadphase collision callback interface,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3DynamicBvh.cpp,GPU dynamic bounding volume hierarchy implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3DynamicBvh.h,GPU dynamic bounding volume hierarchy header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3DynamicBvhBroadphase.cpp,GPU dynamic BVH broadphase implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3DynamicBvhBroadphase.h,GPU dynamic BVH broadphase header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3OverlappingPair.h,GPU overlapping pair data structure,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3OverlappingPairCache.cpp,GPU overlapping pair cache implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/b3OverlappingPairCache.h,GPU overlapping pair cache header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/BroadPhaseCollision/shared/b3Aabb.h,GPU shared AABB data structure,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3Config.h,GPU collision detection configuration,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3Contact4.h,GPU contact point data structure (4 contacts),Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3ConvexUtility.cpp,GPU convex utility functions implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3ConvexUtility.h,GPU convex utility functions header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3CpuNarrowPhase.cpp,GPU CPU fallback narrow phase collision,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3CpuNarrowPhase.h,GPU CPU fallback narrow phase header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3RaycastInfo.h,GPU raycast information structure,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Collision/NarrowPhaseCollision/b3RigidBodyCL.h,GPU rigid body OpenCL data structure,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Common/b3AlignedAllocator.cpp,GPU aligned memory allocator implementation,Skip - memory management not needed in TypeScript
+Bullet3Common/b3AlignedAllocator.h,GPU aligned memory allocator header,Skip - memory management not needed in TypeScript
+Bullet3Common/b3AlignedObjectArray.h,GPU aligned object array template,Replace with native TypeScript arrays (T[])
+Bullet3Common/b3CommandLineArgs.h,GPU command line argument parsing utility,Skip - not applicable to TypeScript library
+Bullet3Common/b3FileUtils.h,GPU file utility functions,Skip or replace with Node.js fs module equivalents if needed
+Bullet3Common/b3HashMap.h,GPU hash map implementation,Replace with native TypeScript Map<K,V> or object literals
+Bullet3Common/b3Logging.cpp,GPU logging implementation,Replace with console logging or custom TypeScript logger
+Bullet3Common/b3Logging.h,GPU logging header,Replace with console logging or custom TypeScript logger
+Bullet3Common/b3Matrix3x3.h,GPU 3x3 matrix math,Duplicate of LinearMath btMatrix3x3 - skip and use main LinearMath version
+Bullet3Common/b3MinMax.h,GPU min/max utility functions,Duplicate of LinearMath btMinMax - skip and use main LinearMath version
+Bullet3Common/b3PoolAllocator.h,GPU pool allocator template,Skip - memory management not needed in TypeScript
+Bullet3Common/b3QuadWord.h,GPU 4-component vector base class,Duplicate of LinearMath functionality - skip
+Bullet3Common/b3Quaternion.h,GPU quaternion math,Duplicate of LinearMath btQuaternion - skip and use main LinearMath version
+Bullet3Common/b3Random.h,GPU random number utilities,Replace with Math.random() or crypto.getRandomValues()
+Bullet3Common/b3ResizablePool.h,GPU resizable memory pool,Skip - memory management not needed in TypeScript
+Bullet3Common/b3Scalar.h,GPU scalar type definitions,Duplicate of LinearMath btScalar - skip and use main LinearMath version
+Bullet3Common/b3StackAlloc.h,GPU stack allocator,Skip - memory management not needed in TypeScript
+Bullet3Common/b3Transform.h,GPU transformation matrix,Duplicate of LinearMath btTransform - skip and use main LinearMath version
+Bullet3Common/b3TransformUtil.h,GPU transform utility functions,Duplicate of LinearMath functionality - skip
+Bullet3Common/b3Vector3.cpp,GPU 3D vector implementation,Duplicate of LinearMath btVector3 - skip and use main LinearMath version
+Bullet3Common/b3Vector3.h,GPU 3D vector header,Duplicate of LinearMath btVector3 - skip and use main LinearMath version
+Bullet3Common/shared/b3Float4.h,GPU 4-component float vector,Skip - GPU-specific SIMD type not applicable
+Bullet3Common/shared/b3Int2.h,GPU 2-component integer vector,Skip - GPU-specific SIMD type not applicable
+Bullet3Common/shared/b3Int4.h,GPU 4-component integer vector,Skip - GPU-specific SIMD type not applicable
+Bullet3Common/shared/b3Mat3x3.h,GPU 3x3 matrix for OpenCL kernels,Skip - GPU-specific kernel code not applicable
+Bullet3Common/shared/b3PlatformDefinitions.h,GPU platform-specific definitions,Skip - platform-specific code not needed in TypeScript
+Bullet3Common/shared/b3Quat.h,GPU quaternion for OpenCL kernels,Skip - GPU-specific kernel code not applicable
+Bullet3Dynamics/b3CpuRigidBodyPipeline.cpp,GPU CPU fallback rigid body pipeline,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/b3CpuRigidBodyPipeline.h,GPU CPU fallback rigid body pipeline header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3ContactSolverInfo.h,GPU contact solver configuration,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3FixedConstraint.cpp,GPU fixed constraint implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3FixedConstraint.h,GPU fixed constraint header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3Generic6DofConstraint.cpp,GPU 6DOF constraint implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3Generic6DofConstraint.h,GPU 6DOF constraint header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3JacobianEntry.h,GPU Jacobian matrix entry,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3PgsJacobiSolver.cpp,GPU PGS Jacobi solver implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3PgsJacobiSolver.h,GPU PGS Jacobi solver header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3Point2PointConstraint.cpp,GPU point-to-point constraint implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3Point2PointConstraint.h,GPU point-to-point constraint header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3SolverBody.h,GPU solver body data structure,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3SolverConstraint.h,GPU solver constraint data structure,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3TypedConstraint.cpp,GPU typed constraint base implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Dynamics/ConstraintSolver/b3TypedConstraint.h,GPU typed constraint base header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Geometry/b3AabbUtil.h,GPU AABB utility functions,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Geometry/b3ConvexHullComputer.cpp,GPU convex hull computation implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Geometry/b3ConvexHullComputer.h,GPU convex hull computation header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Geometry/b3GeometryUtil.cpp,GPU geometry utility functions implementation,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Geometry/b3GeometryUtil.h,GPU geometry utility functions header,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3Geometry/b3GrahamScan2dConvexHull.h,GPU Graham scan 2D convex hull algorithm,Skip - GPU-specific code not applicable to TypeScript port
+Bullet3OpenCL/**/*,All OpenCL GPU acceleration code,Skip entire directory - OpenCL not applicable to TypeScript
+Bullet3Serialize/Bullet2FileLoader/autogenerated/bullet2.h,Auto-generated serialization structures,Skip - serialization can be handled with JSON in TypeScript
+Bullet3Serialize/Bullet2FileLoader/b3BulletFile.cpp,Bullet file format loader implementation,Port later - convert to JSON-based serialization system
+Bullet3Serialize/Bullet2FileLoader/b3BulletFile.h,Bullet file format loader header,Port later - convert to JSON-based serialization system
+Bullet3Serialize/Bullet2FileLoader/b3Chunk.cpp,Bullet file chunk reading implementation,Port later - convert to JSON-based serialization system
+Bullet3Serialize/Bullet2FileLoader/b3Chunk.h,Bullet file chunk reading header,Port later - convert to JSON-based serialization system
+Bullet3Serialize/Bullet2FileLoader/b3Common.h,Bullet serialization common definitions,Port later - convert to JSON-based serialization system
+Bullet3Serialize/Bullet2FileLoader/b3Defines.h,Bullet serialization definitions,Port later - convert to JSON-based serialization system
+Bullet3Serialize/Bullet2FileLoader/b3DNA.cpp,Bullet DNA (data structure description) implementation,Port later - convert to JSON schema system
+Bullet3Serialize/Bullet2FileLoader/b3DNA.h,Bullet DNA (data structure description) header,Port later - convert to JSON schema system
+Bullet3Serialize/Bullet2FileLoader/b3File.cpp,Bullet file I/O implementation,Port later - use Node.js fs module or browser File API
+Bullet3Serialize/Bullet2FileLoader/b3File.h,Bullet file I/O header,Port later - use Node.js fs module or browser File API
+Bullet3Serialize/Bullet2FileLoader/b3Serializer.cpp,Bullet serializer implementation,Port later - convert to JSON serialization system
+Bullet3Serialize/Bullet2FileLoader/b3Serializer.h,Bullet serializer header,Port later - convert to JSON serialization system
+BulletCollision/BroadphaseCollision/btAxisSweep3.cpp,Axis sweep and prune broadphase algorithm implementation,Direct port - core collision detection algorithm
+BulletCollision/BroadphaseCollision/btAxisSweep3.h,Axis sweep and prune broadphase algorithm header,Direct port - core collision detection algorithm
+BulletCollision/BroadphaseCollision/btAxisSweep3Internal.h,Axis sweep internal implementation details,Direct port - merge with main btAxisSweep3 implementation
+BulletCollision/BroadphaseCollision/btBroadphaseInterface.h,Abstract broadphase collision interface,Direct port - convert to TypeScript interface
+BulletCollision/BroadphaseCollision/btBroadphaseProxy.cpp,Broadphase proxy object implementation,Direct port - represents objects in broadphase
+BulletCollision/BroadphaseCollision/btBroadphaseProxy.h,Broadphase proxy object header,Direct port - represents objects in broadphase
+BulletCollision/BroadphaseCollision/btCollisionAlgorithm.cpp,Base collision algorithm implementation,Direct port - abstract base for collision algorithms
+BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h,Base collision algorithm header,Direct port - abstract base for collision algorithms
+BulletCollision/BroadphaseCollision/btDbvt.cpp,Dynamic bounding volume tree implementation,Direct port - important spatial data structure
+BulletCollision/BroadphaseCollision/btDbvt.h,Dynamic bounding volume tree header,Direct port - important spatial data structure
+BulletCollision/BroadphaseCollision/btDbvtBroadphase.cpp,DBVT-based broadphase implementation,Direct port - main broadphase algorithm
+BulletCollision/BroadphaseCollision/btDbvtBroadphase.h,DBVT-based broadphase header,Direct port - main broadphase algorithm
+BulletCollision/BroadphaseCollision/btDispatcher.cpp,Collision dispatcher base implementation,Direct port - manages collision algorithm dispatch
+BulletCollision/BroadphaseCollision/btDispatcher.h,Collision dispatcher base header,Direct port - manages collision algorithm dispatch
+BulletCollision/BroadphaseCollision/btOverlappingPairCache.cpp,Overlapping pair cache implementation,Direct port - caches collision pairs
+BulletCollision/BroadphaseCollision/btOverlappingPairCache.h,Overlapping pair cache header,Direct port - caches collision pairs
+BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h,Overlapping pair callback interface,Direct port - convert to TypeScript interface/callback
+BulletCollision/BroadphaseCollision/btQuantizedBvh.cpp,Quantized bounding volume hierarchy implementation,Direct port - optimized spatial data structure
+BulletCollision/BroadphaseCollision/btQuantizedBvh.h,Quantized bounding volume hierarchy header,Direct port - optimized spatial data structure
+BulletCollision/BroadphaseCollision/btSimpleBroadphase.cpp,Simple O(n²) broadphase implementation,Direct port - useful for small numbers of objects
+BulletCollision/BroadphaseCollision/btSimpleBroadphase.h,Simple O(n²) broadphase header,Direct port - useful for small numbers of objects
+BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.cpp,Self-activating collision algorithm base,Direct port - handles object activation
+BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h,Self-activating collision algorithm header,Direct port - handles object activation
+BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.cpp,2D box-box collision algorithm,Direct port - 2D collision detection
+BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.h,2D box-box collision algorithm header,Direct port - 2D collision detection
+BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.cpp,3D box-box collision algorithm,Direct port - fundamental collision algorithm
+BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h,3D box-box collision algorithm header,Direct port - fundamental collision algorithm
+BulletCollision/CollisionDispatch/btBoxBoxDetector.cpp,Box-box collision detector implementation,Direct port - low-level collision detection
+BulletCollision/CollisionDispatch/btBoxBoxDetector.h,Box-box collision detector header,Direct port - low-level collision detection
+BulletCollision/CollisionDispatch/btCollisionConfiguration.h,Collision system configuration interface,Direct port - convert to TypeScript configuration interface
+BulletCollision/CollisionDispatch/btCollisionCreateFunc.h,Collision algorithm factory function,Convert to TypeScript factory pattern or class constructors
+BulletCollision/CollisionDispatch/btCollisionDispatcher.cpp,Main collision dispatcher implementation,Direct port - core collision system component
+BulletCollision/CollisionDispatch/btCollisionDispatcher.h,Main collision dispatcher header,Direct port - core collision system component
+BulletCollision/CollisionDispatch/btCollisionDispatcherMt.cpp,Multi-threaded collision dispatcher,Skip or simplify - JavaScript is single-threaded
+BulletCollision/CollisionDispatch/btCollisionDispatcherMt.h,Multi-threaded collision dispatcher header,Skip or simplify - JavaScript is single-threaded
+BulletCollision/CollisionDispatch/btCollisionObject.cpp,Base collision object implementation,Direct port - fundamental collision system class
+BulletCollision/CollisionDispatch/btCollisionObject.h,Base collision object header,Direct port - fundamental collision system class
+BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h,Collision object wrapper for algorithms,Direct port - utility wrapper class
+BulletCollision/CollisionDispatch/btCollisionWorld.cpp,Collision world implementation,Direct port - main collision world container
+BulletCollision/CollisionDispatch/btCollisionWorld.h,Collision world header,Direct port - main collision world container
+BulletCollision/CollisionDispatch/btCollisionWorldImporter.cpp,Collision world importer from serialized data,Port later with serialization - JSON-based import
+BulletCollision/CollisionDispatch/btCollisionWorldImporter.h,Collision world importer header,Port later with serialization - JSON-based import
+BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.cpp,Compound shape collision algorithm,Direct port - handles compound shapes
+BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h,Compound shape collision algorithm header,Direct port - handles compound shapes
+BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.cpp,Compound-compound collision algorithm,Direct port - complex collision case
+BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.h,Compound-compound collision algorithm header,Direct port - complex collision case
+BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.cpp,2D convex-convex collision algorithm,Direct port - 2D collision detection
+BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.h,2D convex-convex collision algorithm header,Direct port - 2D collision detection
+BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.cpp,Convex-concave collision algorithm,Direct port - important collision case
+BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.h,Convex-concave collision algorithm header,Direct port - important collision case
+BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.cpp,Convex-convex collision algorithm,Direct port - most common collision case
+BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h,Convex-convex collision algorithm header,Direct port - most common collision case
+BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.cpp,Convex-plane collision algorithm,Direct port - common collision case
+BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h,Convex-plane collision algorithm header,Direct port - common collision case
+BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.cpp,Default collision system configuration,Direct port - standard collision setup
+BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h,Default collision system configuration header,Direct port - standard collision setup
+BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.cpp,Empty/null collision algorithm,Direct port - no-op algorithm
+BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h,Empty/null collision algorithm header,Direct port - no-op algorithm
+BulletCollision/CollisionDispatch/btGhostObject.cpp,Ghost object (non-solid) implementation,Direct port - trigger/sensor objects
+BulletCollision/CollisionDispatch/btGhostObject.h,Ghost object (non-solid) header,Direct port - trigger/sensor objects
+BulletCollision/CollisionDispatch/btHashedSimplePairCache.cpp,Hash-based simple pair cache,Direct port - optimized pair caching
+BulletCollision/CollisionDispatch/btHashedSimplePairCache.h,Hash-based simple pair cache header,Direct port - optimized pair caching
+BulletCollision/CollisionDispatch/btInternalEdgeUtility.cpp,Internal edge utility for mesh collision,Direct port - mesh collision optimization
+BulletCollision/CollisionDispatch/btInternalEdgeUtility.h,Internal edge utility header,Direct port - mesh collision optimization
+BulletCollision/CollisionDispatch/btManifoldResult.cpp,Collision manifold result implementation,Direct port - collision contact results
+BulletCollision/CollisionDispatch/btManifoldResult.h,Collision manifold result header,Direct port - collision contact results
+BulletCollision/CollisionDispatch/btSimulationIslandManager.cpp,Simulation island manager for optimization,Direct port - performance optimization system
+BulletCollision/CollisionDispatch/btSimulationIslandManager.h,Simulation island manager header,Direct port - performance optimization system
+BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.cpp,Sphere-box collision algorithm,Direct port - common collision case
+BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h,Sphere-box collision algorithm header,Direct port - common collision case
+BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.cpp,Sphere-sphere collision algorithm,Direct port - simplest collision case
+BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h,Sphere-sphere collision algorithm header,Direct port - simplest collision case
+BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.cpp,Sphere-triangle collision algorithm,Direct port - mesh collision case
+BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h,Sphere-triangle collision algorithm header,Direct port - mesh collision case
+BulletCollision/CollisionDispatch/btUnionFind.cpp,Union-find data structure implementation,Direct port - useful algorithm for graph operations
+BulletCollision/CollisionDispatch/btUnionFind.h,Union-find data structure header,Direct port - useful algorithm for graph operations
+BulletCollision/CollisionDispatch/SphereTriangleDetector.cpp,Sphere-triangle detector implementation,Direct port - low-level collision detection
+BulletCollision/CollisionDispatch/SphereTriangleDetector.h,Sphere-triangle detector header,Direct port - low-level collision detection
+BulletCollision/CollisionShapes/btBox2dShape.cpp,2D box collision shape implementation,Direct port - basic 2D shape
+BulletCollision/CollisionShapes/btBox2dShape.h,2D box collision shape header,Direct port - basic 2D shape
+BulletCollision/CollisionShapes/btBoxShape.cpp,3D box collision shape implementation,Direct port - fundamental collision shape (priority)
+BulletCollision/CollisionShapes/btBoxShape.h,3D box collision shape header,Direct port - fundamental collision shape (priority)
+BulletCollision/CollisionShapes/btBvhTriangleMeshShape.cpp,BVH triangle mesh shape implementation,Direct port - optimized mesh collision
+BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h,BVH triangle mesh shape header,Direct port - optimized mesh collision
+BulletCollision/CollisionShapes/btCapsuleShape.cpp,Capsule collision shape implementation,Direct port - fundamental collision shape (priority)
+BulletCollision/CollisionShapes/btCapsuleShape.h,Capsule collision shape header,Direct port - fundamental collision shape (priority)
+BulletCollision/CollisionShapes/btCollisionMargin.h,Collision margin configuration,Direct port - collision tolerance constants
+BulletCollision/CollisionShapes/btCollisionShape.cpp,Base collision shape implementation,Direct port - abstract base class (priority)
+BulletCollision/CollisionShapes/btCollisionShape.h,Base collision shape header,Direct port - abstract base class (priority)
+BulletCollision/CollisionShapes/btCompoundShape.cpp,Compound shape (multiple shapes) implementation,Direct port - important composite shape
+BulletCollision/CollisionShapes/btCompoundShape.h,Compound shape (multiple shapes) header,Direct port - important composite shape
+BulletCollision/CollisionShapes/btConcaveShape.cpp,Base concave shape implementation,Direct port - base for mesh shapes
+BulletCollision/CollisionShapes/btConcaveShape.h,Base concave shape header,Direct port - base for mesh shapes
+BulletCollision/CollisionShapes/btConeShape.cpp,Cone collision shape implementation,Direct port - basic geometric shape
+BulletCollision/CollisionShapes/btConeShape.h,Cone collision shape header,Direct port - basic geometric shape
+BulletCollision/CollisionShapes/btConvex2dShape.cpp,2D convex shape wrapper implementation,Direct port - 2D collision support
+BulletCollision/CollisionShapes/btConvex2dShape.h,2D convex shape wrapper header,Direct port - 2D collision support
+BulletCollision/CollisionShapes/btConvexHullShape.cpp,Convex hull shape implementation,Direct port - important shape type
+BulletCollision/CollisionShapes/btConvexHullShape.h,Convex hull shape header,Direct port - important shape type
+BulletCollision/CollisionShapes/btConvexInternalShape.cpp,Base convex shape implementation,Direct port - base for convex shapes
+BulletCollision/CollisionShapes/btConvexInternalShape.h,Base convex shape header,Direct port - base for convex shapes
+BulletCollision/CollisionShapes/btConvexPointCloudShape.cpp,Convex point cloud shape implementation,Direct port - specialized convex shape
+BulletCollision/CollisionShapes/btConvexPointCloudShape.h,Convex point cloud shape header,Direct port - specialized convex shape
+BulletCollision/CollisionShapes/btConvexPolyhedron.cpp,Convex polyhedron data structure,Direct port - geometric data structure
+BulletCollision/CollisionShapes/btConvexPolyhedron.h,Convex polyhedron data structure header,Direct port - geometric data structure
+BulletCollision/CollisionShapes/btConvexShape.cpp,Base convex shape implementation,Direct port - base for all convex shapes
+BulletCollision/CollisionShapes/btConvexShape.h,Base convex shape header,Direct port - base for all convex shapes
+BulletCollision/CollisionShapes/btConvexTriangleMeshShape.cpp,Convex triangle mesh shape implementation,Direct port - convex mesh shape
+BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h,Convex triangle mesh shape header,Direct port - convex mesh shape
+BulletCollision/CollisionShapes/btCylinderShape.cpp,Cylinder collision shape implementation,Direct port - basic geometric shape
+BulletCollision/CollisionShapes/btCylinderShape.h,Cylinder collision shape header,Direct port - basic geometric shape
+BulletCollision/CollisionShapes/btEmptyShape.cpp,Empty collision shape implementation,Direct port - null/empty shape
+BulletCollision/CollisionShapes/btEmptyShape.h,Empty collision shape header,Direct port - null/empty shape
+BulletCollision/CollisionShapes/btHeightfieldTerrainShape.cpp,Heightfield terrain shape implementation,Direct port - terrain collision
+BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h,Heightfield terrain shape header,Direct port - terrain collision
+BulletCollision/CollisionShapes/btMaterial.h,Material properties for collision shapes,Direct port - material property system
+BulletCollision/CollisionShapes/btMiniSDF.cpp,Mini signed distance field implementation,Direct port - SDF collision detection
+BulletCollision/CollisionShapes/btMiniSDF.h,Mini signed distance field header,Direct port - SDF collision detection
+BulletCollision/CollisionShapes/btMinkowskiSumShape.cpp,Minkowski sum shape implementation,Direct port - advanced geometric shape
+BulletCollision/CollisionShapes/btMinkowskiSumShape.h,Minkowski sum shape header,Direct port - advanced geometric shape
+BulletCollision/CollisionShapes/btMultimaterialTriangleMeshShape.cpp,Multi-material triangle mesh shape,Direct port - mesh with multiple materials
+BulletCollision/CollisionShapes/btMultimaterialTriangleMeshShape.h,Multi-material triangle mesh shape header,Direct port - mesh with multiple materials
+BulletCollision/CollisionShapes/btMultiSphereShape.cpp,Multi-sphere shape implementation,Direct port - compound sphere shape
+BulletCollision/CollisionShapes/btMultiSphereShape.h,Multi-sphere shape header,Direct port - compound sphere shape
+BulletCollision/CollisionShapes/btOptimizedBvh.cpp,Optimized bounding volume hierarchy,Direct port - mesh acceleration structure
+BulletCollision/CollisionShapes/btOptimizedBvh.h,Optimized bounding volume hierarchy header,Direct port - mesh acceleration structure
+BulletCollision/CollisionShapes/btPolyhedralConvexShape.cpp,Polyhedral convex shape base implementation,Direct port - base for polyhedral shapes
+BulletCollision/CollisionShapes/btPolyhedralConvexShape.h,Polyhedral convex shape base header,Direct port - base for polyhedral shapes
+BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.cpp,Scaled BVH triangle mesh shape,Direct port - scaled mesh collision
+BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h,Scaled BVH triangle mesh shape header,Direct port - scaled mesh collision
+BulletCollision/CollisionShapes/btSdfCollisionShape.cpp,Signed distance field collision shape,Direct port - SDF-based collision
+BulletCollision/CollisionShapes/btSdfCollisionShape.h,Signed distance field collision shape header,Direct port - SDF-based collision
+BulletCollision/CollisionShapes/btShapeHull.cpp,Shape hull computation implementation,Direct port - convex hull utilities
+BulletCollision/CollisionShapes/btShapeHull.h,Shape hull computation header,Direct port - convex hull utilities
+BulletCollision/CollisionShapes/btSphereShape.cpp,Sphere collision shape implementation,Direct port - fundamental collision shape (priority)
+BulletCollision/CollisionShapes/btSphereShape.h,Sphere collision shape header,Direct port - fundamental collision shape (priority)
+BulletCollision/CollisionShapes/btStaticPlaneShape.cpp,Static infinite plane shape implementation,Direct port - infinite plane collision
+BulletCollision/CollisionShapes/btStaticPlaneShape.h,Static infinite plane shape header,Direct port - infinite plane collision
+BulletCollision/CollisionShapes/btStridingMeshInterface.cpp,Mesh data interface implementation,Direct port - mesh data abstraction
+BulletCollision/CollisionShapes/btStridingMeshInterface.h,Mesh data interface header,Direct port - mesh data abstraction
+BulletCollision/CollisionShapes/btTetrahedronShape.cpp,Tetrahedron shape implementation,Direct port - basic geometric shape
+BulletCollision/CollisionShapes/btTetrahedronShape.h,Tetrahedron shape header,Direct port - basic geometric shape
+BulletCollision/CollisionShapes/btTriangleBuffer.cpp,Triangle buffer implementation,Direct port - triangle data storage
+BulletCollision/CollisionShapes/btTriangleBuffer.h,Triangle buffer header,Direct port - triangle data storage
+BulletCollision/CollisionShapes/btTriangleCallback.cpp,Triangle processing callback,Direct port - triangle processing interface
+BulletCollision/CollisionShapes/btTriangleCallback.h,Triangle processing callback header,Direct port - triangle processing interface
+BulletCollision/CollisionShapes/btTriangleIndexVertexArray.cpp,Triangle mesh data array implementation,Direct port - mesh data structure
+BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h,Triangle mesh data array header,Direct port - mesh data structure
+BulletCollision/CollisionShapes/btTriangleIndexVertexMaterialArray.cpp,Triangle mesh with materials implementation,Direct port - mesh with material data
+BulletCollision/CollisionShapes/btTriangleIndexVertexMaterialArray.h,Triangle mesh with materials header,Direct port - mesh with material data
+BulletCollision/CollisionShapes/btTriangleInfoMap.h,Triangle information mapping,Direct port - triangle metadata storage
+BulletCollision/CollisionShapes/btTriangleMesh.cpp,Triangle mesh implementation,Direct port - basic mesh structure
+BulletCollision/CollisionShapes/btTriangleMesh.h,Triangle mesh header,Direct port - basic mesh structure
+BulletCollision/CollisionShapes/btTriangleMeshShape.cpp,Triangle mesh collision shape,Direct port - mesh collision shape
+BulletCollision/CollisionShapes/btTriangleMeshShape.h,Triangle mesh collision shape header,Direct port - mesh collision shape
+BulletCollision/CollisionShapes/btTriangleShape.h,Single triangle shape header,Direct port - basic triangle shape
+BulletCollision/CollisionShapes/btUniformScalingShape.cpp,Uniform scaling shape wrapper,Direct port - scaled shape wrapper
+BulletCollision/CollisionShapes/btUniformScalingShape.h,Uniform scaling shape wrapper header,Direct port - scaled shape wrapper
+BulletCollision/Gimpact/**/*,GIMPACT triangle mesh collision system,Port later - complex mesh collision system
+BulletCollision/NarrowPhaseCollision/btComputeGjkEpaPenetration.h,GJK-EPA penetration computation,Direct port - core collision algorithm
+BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.cpp,Continuous convex collision detection,Direct port - continuous collision detection
+BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.h,Continuous convex collision detection header,Direct port - continuous collision detection
+BulletCollision/NarrowPhaseCollision/btConvexCast.cpp,Convex shape casting implementation,Direct port - collision casting/sweeping
+BulletCollision/NarrowPhaseCollision/btConvexCast.h,Convex shape casting header,Direct port - collision casting/sweeping
+BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h,Convex penetration depth solver interface,Direct port - penetration calculation
+BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h,Discrete collision detector interface,Direct port - collision detection interface
+BulletCollision/NarrowPhaseCollision/btGjkCollisionDescription.h,GJK collision algorithm configuration,Direct port - GJK algorithm setup
+BulletCollision/NarrowPhaseCollision/btGjkConvexCast.cpp,GJK-based convex casting implementation,Direct port - continuous collision with GJK
+BulletCollision/NarrowPhaseCollision/btGjkConvexCast.h,GJK-based convex casting header,Direct port - continuous collision with GJK
+BulletCollision/NarrowPhaseCollision/btGjkEpa2.cpp,GJK-EPA algorithm implementation version 2,Direct port - core collision algorithm
+BulletCollision/NarrowPhaseCollision/btGjkEpa2.h,GJK-EPA algorithm header version 2,Direct port - core collision algorithm
+BulletCollision/NarrowPhaseCollision/btGjkEpa3.h,GJK-EPA algorithm version 3,Direct port - core collision algorithm
+BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.cpp,GJK-EPA penetration solver implementation,Direct port - penetration depth calculation
+BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h,GJK-EPA penetration solver header,Direct port - penetration depth calculation
+BulletCollision/NarrowPhaseCollision/btGjkPairDetector.cpp,GJK pair detector implementation,Direct port - GJK collision detection
+BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h,GJK pair detector header,Direct port - GJK collision detection
+BulletCollision/NarrowPhaseCollision/btManifoldPoint.h,Collision manifold point data,Direct port - contact point representation
+BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.cpp,Minkowski penetration depth solver,Direct port - alternative penetration solver
+BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h,Minkowski penetration depth solver header,Direct port - alternative penetration solver
+BulletCollision/NarrowPhaseCollision/btMprPenetration.h,MPR penetration detection algorithm,Direct port - alternative to GJK-EPA
+BulletCollision/NarrowPhaseCollision/btPersistentManifold.cpp,Persistent collision manifold implementation,Direct port - contact point persistence
+BulletCollision/NarrowPhaseCollision/btPersistentManifold.h,Persistent collision manifold header,Direct port - contact point persistence
+BulletCollision/NarrowPhaseCollision/btPointCollector.h,Point collection utility for collision,Direct port - collision point gathering
+BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.cpp,Polyhedral contact clipping implementation,Direct port - contact point generation
+BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.h,Polyhedral contact clipping header,Direct port - contact point generation
+BulletCollision/NarrowPhaseCollision/btRaycastCallback.cpp,Raycast result callback implementation,Direct port - raycast result handling
+BulletCollision/NarrowPhaseCollision/btRaycastCallback.h,Raycast result callback header,Direct port - raycast result handling
+BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h,Simplex solver interface for GJK,Direct port - GJK algorithm interface
+BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.cpp,Sub-simplex convex casting implementation,Direct port - specialized collision casting
+BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h,Sub-simplex convex casting header,Direct port - specialized collision casting
+BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.cpp,Voronoi simplex solver implementation,Direct port - GJK algorithm component
+BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h,Voronoi simplex solver header,Direct port - GJK algorithm component
+BulletDynamics/Character/btCharacterControllerInterface.h,Character controller interface,Direct port - character movement interface
+BulletDynamics/Character/btKinematicCharacterController.cpp,Kinematic character controller implementation,Direct port - character physics
+BulletDynamics/Character/btKinematicCharacterController.h,Kinematic character controller header,Direct port - character physics
+BulletDynamics/ConstraintSolver/btBatchedConstraints.cpp,Batched constraint solver implementation,Direct port - constraint batching optimization
+BulletDynamics/ConstraintSolver/btBatchedConstraints.h,Batched constraint solver header,Direct port - constraint batching optimization
+BulletDynamics/ConstraintSolver/btConeTwistConstraint.cpp,Cone-twist joint constraint implementation,Direct port - joint constraint type
+BulletDynamics/ConstraintSolver/btConeTwistConstraint.h,Cone-twist joint constraint header,Direct port - joint constraint type
+BulletDynamics/ConstraintSolver/btConstraintSolver.h,Base constraint solver interface,Direct port - constraint solving interface
+BulletDynamics/ConstraintSolver/btContactConstraint.cpp,Contact constraint implementation,Direct port - collision response constraints
+BulletDynamics/ConstraintSolver/btContactConstraint.h,Contact constraint header,Direct port - collision response constraints
+BulletDynamics/ConstraintSolver/btContactSolverInfo.h,Contact solver configuration,Direct port - solver parameters
+BulletDynamics/ConstraintSolver/btFixedConstraint.cpp,Fixed joint constraint implementation,Direct port - rigid joint constraint
+BulletDynamics/ConstraintSolver/btFixedConstraint.h,Fixed joint constraint header,Direct port - rigid joint constraint
+BulletDynamics/ConstraintSolver/btGearConstraint.cpp,Gear constraint implementation,Direct port - gear joint constraint
+BulletDynamics/ConstraintSolver/btGearConstraint.h,Gear constraint header,Direct port - gear joint constraint
+BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.cpp,6DOF generic joint constraint,Direct port - most flexible joint type
+BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h,6DOF generic joint constraint header,Direct port - most flexible joint type
+BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.cpp,6DOF spring constraint version 2,Direct port - spring joint constraint
+BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h,6DOF spring constraint version 2 header,Direct port - spring joint constraint
+BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.cpp,6DOF spring constraint implementation,Direct port - spring joint constraint
+BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h,6DOF spring constraint header,Direct port - spring joint constraint
+BulletDynamics/ConstraintSolver/btHinge2Constraint.cpp,Hinge2 joint constraint implementation,Direct port - double-axis hinge joint
+BulletDynamics/ConstraintSolver/btHinge2Constraint.h,Hinge2 joint constraint header,Direct port - double-axis hinge joint
+BulletDynamics/ConstraintSolver/btHingeConstraint.cpp,Hinge joint constraint implementation,Direct port - single-axis hinge joint
+BulletDynamics/ConstraintSolver/btHingeConstraint.h,Hinge joint constraint header,Direct port - single-axis hinge joint
+BulletDynamics/ConstraintSolver/btJacobianEntry.h,Jacobian matrix entry for constraints,Direct port - constraint mathematics
+BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.cpp,NNCG constraint solver implementation,Direct port - advanced constraint solver
+BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.h,NNCG constraint solver header,Direct port - advanced constraint solver
+BulletDynamics/ConstraintSolver/btPoint2PointConstraint.cpp,Point-to-point constraint implementation,Direct port - ball joint constraint
+BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h,Point-to-point constraint header,Direct port - ball joint constraint
+BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.cpp,Sequential impulse constraint solver,Direct port - main constraint solver
+BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h,Sequential impulse constraint solver header,Direct port - main constraint solver
+BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolverMt.cpp,Multi-threaded sequential impulse solver,Skip or simplify - JavaScript is single-threaded
+BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolverMt.h,Multi-threaded sequential impulse solver header,Skip or simplify - JavaScript is single-threaded
+BulletDynamics/ConstraintSolver/btSliderConstraint.cpp,Slider joint constraint implementation,Direct port - sliding joint constraint
+BulletDynamics/ConstraintSolver/btSliderConstraint.h,Slider joint constraint header,Direct port - sliding joint constraint
+BulletDynamics/ConstraintSolver/btSolverBody.h,Solver body data structure,Direct port - constraint solver body representation
+BulletDynamics/ConstraintSolver/btSolverConstraint.h,Solver constraint data structure,Direct port - constraint solver constraint representation
+BulletDynamics/ConstraintSolver/btTypedConstraint.cpp,Base typed constraint implementation,Direct port - base constraint class
+BulletDynamics/ConstraintSolver/btTypedConstraint.h,Base typed constraint header,Direct port - base constraint class
+BulletDynamics/ConstraintSolver/btUniversalConstraint.cpp,Universal joint constraint implementation,Direct port - universal joint constraint
+BulletDynamics/ConstraintSolver/btUniversalConstraint.h,Universal joint constraint header,Direct port - universal joint constraint
+BulletDynamics/Dynamics/btActionInterface.h,Action interface for custom behaviors,Direct port - custom action interface
+BulletDynamics/Dynamics/btDiscreteDynamicsWorld.cpp,Main discrete dynamics world implementation,Direct port - core dynamics system (priority)
+BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h,Main discrete dynamics world header,Direct port - core dynamics system (priority)
+BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.cpp,Multi-threaded discrete dynamics world,Skip or simplify - JavaScript is single-threaded
+BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h,Multi-threaded discrete dynamics world header,Skip or simplify - JavaScript is single-threaded
+BulletDynamics/Dynamics/btDynamicsWorld.cpp,Base dynamics world implementation,Direct port - base dynamics system
+BulletDynamics/Dynamics/btDynamicsWorld.h,Base dynamics world header,Direct port - base dynamics system
+BulletDynamics/Dynamics/btRigidBody.cpp,Rigid body implementation,Direct port - core rigid body physics (priority)
+BulletDynamics/Dynamics/btRigidBody.h,Rigid body header,Direct port - core rigid body physics (priority)
+BulletDynamics/Dynamics/btSimpleDynamicsWorld.cpp,Simple dynamics world implementation,Direct port - simplified dynamics system
+BulletDynamics/Dynamics/btSimpleDynamicsWorld.h,Simple dynamics world header,Direct port - simplified dynamics system
+BulletDynamics/Featherstone/**/*,Featherstone multi-body dynamics system,Port later - advanced multi-body physics
+BulletDynamics/MLCPSolvers/**/*,MLCP constraint solvers,Port later - advanced constraint solvers
+BulletDynamics/Vehicle/**/*,Vehicle simulation system,Port later - specialized vehicle physics
+BulletInverseDynamics/**/*,Inverse dynamics system,Port later - advanced inverse dynamics
+BulletSoftBody/**/*,Soft body physics system,Port later - complex soft body simulation
+clew/**/*,OpenCL extension wrangler library,Skip - OpenCL not applicable to TypeScript
+LinearMath/btAabbUtil2.h,AABB utility functions version 2,Direct port - bounding box utilities
+LinearMath/btAlignedAllocator.h,Aligned memory allocator,Skip - memory management not needed in TypeScript
+LinearMath/btAlignedObjectArray.h,Aligned object array template,Replace with native TypeScript arrays (T[])
+LinearMath/btConvexHull.cpp,Convex hull computation implementation,Direct port - important geometric algorithm
+LinearMath/btConvexHull.h,Convex hull computation header,Direct port - important geometric algorithm
+LinearMath/btConvexHullComputer.cpp,Convex hull computer implementation,Direct port - geometric computation
+LinearMath/btConvexHullComputer.h,Convex hull computer header,Direct port - geometric computation
+LinearMath/btCpuFeatureUtility.h,CPU feature detection utilities,Skip - platform-specific code not needed
+LinearMath/btDefaultMotionState.cpp,Default motion state implementation,Direct port - basic motion state
+LinearMath/btDefaultMotionState.h,Default motion state header,Direct port - basic motion state
+LinearMath/btGeometryUtil.cpp,Geometry utility functions implementation,Direct port - geometric utilities
+LinearMath/btGeometryUtil.h,Geometry utility functions header,Direct port - geometric utilities
+LinearMath/btGrahamScan2dConvexHull.h,2D Graham scan convex hull algorithm,Direct port - 2D geometric algorithm
+LinearMath/btHashMap.h,Hash map implementation,Replace with native TypeScript Map<K,V>
+LinearMath/btIDebugDraw.h,Debug drawing interface,Direct port - convert to TypeScript interface
+LinearMath/btMatrix3x3.h,3x3 matrix math header,Direct port - fundamental math class (priority)
+LinearMath/btMinMax.h,Min/max utility functions,Direct port - basic math utilities (priority)
+LinearMath/btMotionState.h,Motion state interface,Direct port - transform interface
+LinearMath/btPolarDecomposition.cpp,Polar decomposition implementation,Direct port - matrix decomposition algorithm
+LinearMath/btPolarDecomposition.h,Polar decomposition header,Direct port - matrix decomposition algorithm
+LinearMath/btPoolAllocator.h,Pool memory allocator,Skip - memory management not needed in TypeScript
+LinearMath/btQuadWord.h,4-component word base class,Direct port - base for vectors/quaternions
+LinearMath/btQuaternion.h,Quaternion math header,Direct port - fundamental math class (priority)
+LinearMath/btQuickprof.cpp,Quick profiling utility implementation,Skip or replace with console.time/timeEnd
+LinearMath/btQuickprof.h,Quick profiling utility header,Skip or replace with console.time/timeEnd
+LinearMath/btRandom.h,Random number utilities,Replace with Math.random() or crypto.getRandomValues()
+LinearMath/btReducedVector.cpp,Reduced vector implementation,Direct port - specialized vector operations
+LinearMath/btReducedVector.h,Reduced vector header,Direct port - specialized vector operations
+LinearMath/btScalar.h,Scalar type definitions and math constants,Direct port - fundamental type definitions (priority)
+LinearMath/btSerializer.cpp,Serialization utilities implementation,Port later with JSON-based serialization
+LinearMath/btSerializer.h,Serialization utilities header,Port later with JSON-based serialization
+LinearMath/btStackAlloc.h,Stack memory allocator,Skip - memory management not needed in TypeScript
+LinearMath/btThreads.cpp,Threading utilities implementation,Skip or replace with Web Workers if needed
+LinearMath/btThreads.h,Threading utilities header,Skip or replace with Web Workers if needed
+LinearMath/btTransform.h,Transform (position and rotation) header,Direct port - fundamental math class (priority)
+LinearMath/btTransformUtil.h,Transform utility functions,Direct port - transform manipulation utilities
+LinearMath/btVector3.h,3D vector math header,Direct port - fundamental math class (priority)
+LinearMath/TaskScheduler/**/*,Task scheduling system,Skip or replace with Promise-based async patterns
