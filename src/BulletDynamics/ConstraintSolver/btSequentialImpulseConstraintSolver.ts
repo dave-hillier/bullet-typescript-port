@@ -50,11 +50,11 @@ export class btSequentialImpulseConstraintSolver extends btConstraintSolver {
   // Internal solver data structures (simplified for stub implementation)
   private m_tmpSolverBodyPool: btSolverBody[] = [];
   private m_tmpSolverContactConstraintPool: btSolverConstraint[] = [];
-  private m_maxOverrideNumSolverIterations: number = 0;
-  private m_fixedBodyId: number = -1;
+  private _m_maxOverrideNumSolverIterations: number = 0;
+  private _m_fixedBodyId: number = -1;
   private m_btSeed2: number = 0;
   private m_leastSquaresResidual: number = 0;
-  private m_cachedSolverMode: number = 0;
+  private _m_cachedSolverMode: number = 0;
 
   public m_analyticsData: btSolverAnalyticsData;
 
@@ -74,13 +74,13 @@ export class btSequentialImpulseConstraintSolver extends btConstraintSolver {
   solveGroup(
     bodies: btCollisionObject[],
     numBodies: number,
-    manifolds: btPersistentManifold[],
+    _manifolds: btPersistentManifold[],
     numManifolds: number,
-    constraints: btTypedConstraint[],
-    numConstraints: number,
+    _constraints: btTypedConstraint[],
+    _numConstraints: number,
     info: btContactSolverInfo,
-    debugDrawer: btIDebugDraw | null,
-    dispatcher: btDispatcher
+    _debugDrawer: btIDebugDraw | null,
+    _dispatcher: btDispatcher
   ): number {
     // Basic stub implementation
     // In a real implementation, this would:
@@ -151,7 +151,7 @@ export class btSequentialImpulseConstraintSolver extends btConstraintSolver {
   }
 
   // Helper method for basic body integration (very simplified)
-  private integrateBody(body: btCollisionObject, timeStep: number): void {
+  private integrateBody(body: btCollisionObject, _timeStep: number): void {
     // This is a very basic stub - real implementation would be much more complex
     // and would handle forces, velocities, constraints, contacts, etc.
     

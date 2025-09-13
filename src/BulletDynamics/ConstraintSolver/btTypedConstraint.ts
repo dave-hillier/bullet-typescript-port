@@ -114,7 +114,7 @@ export abstract class btTypedConstraint {
     protected m_dbgDrawSize: number;
     protected m_jointFeedback: btJointFeedback | null;
 
-    constructor(type: btTypedConstraintType, rbA: any, rbB?: any) {
+    constructor(_type: btTypedConstraintType, rbA: any, rbB?: any) {
         this.m_userConstraintType = -1;
         this.m_userConstraintId = -1;
         this.m_breakingImpulseThreshold = 3.402823466e+38; // FLT_MAX
@@ -192,7 +192,7 @@ export abstract class btTypedConstraint {
         return this.m_appliedImpulse;
     }
 
-    protected getMotorFactor(pos: number, lowLim: number, uppLim: number, vel: number, timeFact: number): number {
+    protected getMotorFactor(_pos: number, _lowLim: number, _uppLim: number, _vel: number, _timeFact: number): number {
         // Basic implementation - can be overridden by subclasses
         return 1.0;
     }

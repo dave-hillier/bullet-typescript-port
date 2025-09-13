@@ -49,9 +49,10 @@ This is a **work-in-progress** TypeScript port of the Bullet3 physics engine. Th
    - **BulletInverseDynamics/**: Inverse dynamics calculations
    - **Bullet3Serialize/**: Save/load functionality
 
-5. **GPU Systems** (❌ **MAY SKIP** - consider skipping initially):
-   - **Bullet3Common/**, **Bullet3Collision/**, **Bullet3Dynamics/**: GPU implementations
-   - **Bullet3OpenCL/**: OpenCL specific code (skip entirely for TypeScript port)
+5. **GPU Systems** (❌ **SKIPPED** - removed from port):
+   - **Bullet3Common/**, **Bullet3Collision/**, **Bullet3Dynamics/**: GPU implementations (removed - failed experiment)
+   - **Bullet3OpenCL/**: OpenCL specific code (not applicable for TypeScript port)
+   - **Note**: The Bullet3 GPU systems were initially attempted but removed as they don't translate well to TypeScript and add unnecessary complexity for the initial port goals.
 
 ## Translation Guidelines
 
@@ -175,16 +176,6 @@ src/
 │   └── BulletReducedDeformableBody/    # Reduced deformable bodies
 ├── BulletInverseDynamics/              # Inverse dynamics
 │   └── details/
-├── Bullet3Common/                       # Bullet3 GPU common code
-│   └── shared/
-├── Bullet3Collision/                    # Bullet3 GPU collision
-│   ├── BroadPhaseCollision/
-│   └── NarrowPhaseCollision/
-├── Bullet3Dynamics/                     # Bullet3 GPU dynamics
-│   ├── ConstraintSolver/
-│   └── shared/
-├── Bullet3Geometry/                     # Bullet3 GPU geometry
-├── Bullet3OpenCL/                       # OpenCL implementations (skip in port)
 └── Bullet3Serialize/                    # Serialization (port later)
     └── Bullet2FileLoader/
 ```

@@ -44,7 +44,7 @@ export enum btConstraintSolverType {
  */
 export abstract class btConstraintSolver {
   
-  prepareSolve(numBodies: number, numManifolds: number): void {
+  prepareSolve(_numBodies: number, _numManifolds: number): void {
     // Default implementation does nothing
   }
 
@@ -63,7 +63,7 @@ export abstract class btConstraintSolver {
     dispatcher: btDispatcher
   ): number;
 
-  allSolved(info: btContactSolverInfo, debugDrawer: btIDebugDraw | null): void {
+  allSolved(_info: btContactSolverInfo, _debugDrawer: btIDebugDraw | null): void {
     // Default implementation does nothing
   }
 

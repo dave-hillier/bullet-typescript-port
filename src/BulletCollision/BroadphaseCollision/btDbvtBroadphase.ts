@@ -60,6 +60,8 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
   private m_paircache: btOverlappingPairCache | null = null;
   private m_prediction: number = 0;
   private m_newpairs: number = 0;
+  private _m_stageCurrent: number = 0;
+  private _m_needcleanup: boolean = false;
 
   constructor(paircache?: btOverlappingPairCache) {
     super();
@@ -101,7 +103,7 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
     proxy: btBroadphaseProxy,
     aabbMin: btVector3,
     aabbMax: btVector3,
-    dispatcher: btDispatcher
+    _dispatcher: btDispatcher
   ): void {
     // Update the proxy's AABB
     proxy.m_aabbMin.copy(aabbMin);
@@ -115,11 +117,11 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
   }
 
   rayTest(
-    rayFrom: btVector3,
-    rayTo: btVector3,
+    _rayFrom: btVector3,
+    _rayTo: btVector3,
     rayCallback: btBroadphaseRayCallback,
-    aabbMin?: btVector3,
-    aabbMax?: btVector3
+    _aabbMin?: btVector3,
+    _aabbMax?: btVector3
   ): void {
     // Basic ray test implementation
     // In a full implementation, this would traverse the DBVT tree efficiently
@@ -133,8 +135,8 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
   }
 
   aabbTest(
-    aabbMin: btVector3,
-    aabbMax: btVector3,
+    _aabbMin: btVector3,
+    _aabbMax: btVector3,
     callback: btBroadphaseAabbCallback
   ): void {
     // Basic AABB test implementation
@@ -147,7 +149,7 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
     }
   }
 
-  calculateOverlappingPairs(dispatcher: btDispatcher): void {
+  calculateOverlappingPairs(_dispatcher: btDispatcher): void {
     // Simple O(n²) collision detection
     // In a full implementation, this would use the DBVT for efficient culling
     this.m_newpairs = 0;
@@ -191,10 +193,10 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
     }
   }
 
-  resetPool(dispatcher: btDispatcher): void {
+  resetPool(_dispatcher: btDispatcher): void {
     // Reset internal structures
-    this.m_stageCurrent = 0;
-    this.m_needcleanup = false;
+    this._m_stageCurrent = 0;
+    this._m_needcleanup = false;
   }
 
   printStats(): void {
@@ -210,7 +212,7 @@ export class btDbvtBroadphase extends btBroadphaseInterface {
     return this.m_prediction;
   }
 
-  performDeferredRemoval(dispatcher: btDispatcher): void {
+  performDeferredRemoval(_dispatcher: btDispatcher): void {
     // Placeholder for deferred removal logic
   }
 
