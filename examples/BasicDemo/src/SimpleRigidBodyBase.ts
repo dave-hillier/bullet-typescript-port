@@ -123,6 +123,10 @@ export abstract class SimpleRigidBodyBase implements CommonExampleInterface {
         shape: btCollisionShape,
         color: btVector3 = new btVector3(1, 0, 0)
     ): btRigidBody {
+        // Debug the input transform
+        const inputOrigin = startTransform.getOrigin();
+        console.log(`createRigidBody input transform: (${inputOrigin.x().toFixed(1)}, ${inputOrigin.y().toFixed(1)}, ${inputOrigin.z().toFixed(1)})`);
+
         // Rigidbody is dynamic if and only if mass is non zero, otherwise static
         const isDynamic = mass !== 0.0;
 
@@ -143,6 +147,22 @@ export abstract class SimpleRigidBodyBase implements CommonExampleInterface {
 
         const body = new btRigidBody(cInfo);
         body.setUserIndex(-1);
+
+        // Debug the body's transform after creation
+        const bodyTransform = body.getWorldTransform();
+        const bodyOrigin = bodyTransform.getOrigin();
+        console.log(`createRigidBody result transform: (${bodyOrigin.x().toFixed(1)}, ${bodyOrigin.y().toFixed(1)}, ${bodyOrigin.z().toFixed(1)})`);
+
+        // WORKAROUND: If the transform is not set correctly, set it manually
+        if (bodyOrigin.x() === 0 && bodyOrigin.y() === 0 && bodyOrigin.z() === 0) {
+            console.log(`Workaround: Setting world transform manually`);
+            body.setWorldTransform(startTransform);
+
+            // Verify the fix worked
+            const fixedTransform = body.getWorldTransform();
+            const fixedOrigin = fixedTransform.getOrigin();
+            console.log(`Fixed transform: (${fixedOrigin.x().toFixed(1)}, ${fixedOrigin.y().toFixed(1)}, ${fixedOrigin.z().toFixed(1)})`);
+        }
 
         if (this.m_dynamicsWorld) {
             this.m_dynamicsWorld.addRigidBody(body);

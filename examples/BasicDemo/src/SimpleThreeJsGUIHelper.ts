@@ -23,6 +23,7 @@ import { btTransform } from '../../../src/LinearMath/btTransform.js';
 import { btRigidBody } from '../../../src/BulletDynamics/Dynamics/btRigidBody.js';
 import { btDiscreteDynamicsWorld } from '../../../src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.js';
 import type { btCollisionShape } from '../../../src/BulletCollision/CollisionShapes/btCollisionShape.js';
+import { btBoxShape } from '../../../src/BulletCollision/CollisionShapes/btBoxShape.js';
 
 /**
  * Simplified Three.js GUI helper for basic physics demonstrations
@@ -99,8 +100,20 @@ export class SimpleThreeJsGUIHelper {
     }
 
     private createMeshFromShape(shape: btCollisionShape, color?: btVector3): THREE.Mesh {
-        // For now, create simple box geometry for all shapes
-        const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+        let geometry: THREE.BufferGeometry;
+
+        // Check if it's a box shape and get proper dimensions
+        if (shape instanceof btBoxShape) {
+            const halfExtents = shape.getHalfExtentsWithMargin();
+            // Convert half-extents to full size (Three.js BoxGeometry expects full width/height/depth)
+            const fullWidth = halfExtents.x() * 2;
+            const fullHeight = halfExtents.y() * 2;
+            const fullDepth = halfExtents.z() * 2;
+            geometry = new THREE.BoxGeometry(fullWidth, fullHeight, fullDepth);
+        } else {
+            // Fallback for other shape types
+            geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+        }
 
         const materialColor = color ?
             new THREE.Color(color.x(), color.y(), color.z()) :
@@ -122,8 +135,8 @@ export class SimpleThreeJsGUIHelper {
         // Three.js defaults to Y-up, so this is mainly for compatibility
     }
 
-    resetCamera(dist: number = 15, yaw: number = 35, pitch: number = 50,
-                targetX: number = 0, targetY: number = 3, targetZ: number = 0): void {
+    resetCamera(dist: number = 20, yaw: number = 45, pitch: number = 30,
+                targetX: number = 0, targetY: number = 5, targetZ: number = 0): void {
         // Convert spherical to cartesian coordinates
         const yawRad = (yaw * Math.PI) / 180;
         const pitchRad = (pitch * Math.PI) / 180;
@@ -140,8 +153,19 @@ export class SimpleThreeJsGUIHelper {
 
     addRigidBody(body: btRigidBody, shape: btCollisionShape, color?: btVector3): void {
         const mesh = this.createMeshFromShape(shape, color);
+
+        // Set initial position from physics body - try direct world transform first
+        const worldTransform = body.getWorldTransform();
+        const origin = worldTransform.getOrigin();
+        const rotation = worldTransform.getRotation();
+
+        mesh.position.set(origin.x(), origin.y(), origin.z());
+        mesh.quaternion.set(rotation.x(), rotation.y(), rotation.z(), rotation.w());
+
         this.rigidBodies.set(body, mesh);
         this.scene.add(mesh);
+
+        console.log(`Added rigid body #${this.rigidBodies.size} at position (${origin.x().toFixed(1)}, ${origin.y().toFixed(1)}, ${origin.z().toFixed(1)})`);
     }
 
     removeRigidBody(body: btRigidBody): void {
@@ -154,19 +178,26 @@ export class SimpleThreeJsGUIHelper {
 
     syncPhysicsToGraphics(world: btDiscreteDynamicsWorld): void {
         // Update Three.js mesh positions from physics bodies
+        let syncCount = 0;
         this.rigidBodies.forEach((mesh, body) => {
-            const transform = new btTransform();
-            body.getMotionState()?.getWorldTransform(transform);
-
-            const origin = transform.getOrigin();
-            const rotation = transform.getRotation();
+            // Use direct world transform instead of motion state
+            const worldTransform = body.getWorldTransform();
+            const origin = worldTransform.getOrigin();
+            const rotation = worldTransform.getRotation();
 
             // Update position
             mesh.position.set(origin.x(), origin.y(), origin.z());
 
             // Update rotation
             mesh.quaternion.set(rotation.x(), rotation.y(), rotation.z(), rotation.w());
+
+            syncCount++;
         });
+
+        // Log sync info occasionally
+        if (syncCount > 0 && Math.random() < 0.01) { // 1% chance to log
+            console.log(`Synced ${syncCount} meshes to physics positions`);
+        }
     }
 
     render(): void {
@@ -186,6 +217,23 @@ export class SimpleThreeJsGUIHelper {
         ground.position.y = yPos;
         ground.receiveShadow = true;
         this.scene.add(ground);
+    }
+
+    // Toggle wireframe mode for all meshes in the scene
+    toggleWireframe(): boolean {
+        let isWireframe = false;
+
+        this.scene.traverse((object) => {
+            if (object instanceof THREE.Mesh && object.material instanceof THREE.MeshLambertMaterial) {
+                // Toggle wireframe on the first mesh we find, then apply to all
+                if (!isWireframe) {
+                    isWireframe = !object.material.wireframe;
+                }
+                object.material.wireframe = isWireframe;
+            }
+        });
+
+        return isWireframe;
     }
 
     // Get scene statistics for debugging

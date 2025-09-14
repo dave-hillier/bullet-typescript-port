@@ -24,6 +24,7 @@ export class BrowserDemo {
     private isRunning = false;
     private frameCount = 0;
     private lastTime = 0;
+    private isWireframe = false;
     
     constructor() {
         // Create the 3D renderer
@@ -151,8 +152,14 @@ export class BrowserDemo {
     }
     
     private toggleWireframe(): void {
-        // Simplified - just log the action for now
-        this.log(`🔧 Wireframe mode toggle (not implemented)`);
+        this.isWireframe = this.guiHelper.toggleWireframe();
+        this.log(`🔧 Wireframe mode: ${this.isWireframe ? 'ON' : 'OFF'}`);
+
+        // Update the button text to reflect current state
+        const wireframeBtn = document.querySelector('button[onclick*="toggleWireframe"]') as HTMLButtonElement;
+        if (wireframeBtn) {
+            wireframeBtn.textContent = this.isWireframe ? 'Solid Mode' : 'Wireframe Mode';
+        }
     }
 
     private log(message: string): void {
@@ -177,6 +184,7 @@ export class BrowserDemo {
                 <div>Objects: <span style="color: #61dafb">${world.getNumCollisionObjects()}</span></div>
                 <div>3D Meshes: <span style="color: #61dafb">${sceneStats.meshes}</span></div>
                 <div>Triangles: <span style="color: #61dafb">${Math.round(sceneStats.triangles)}</span></div>
+                <div>Render Mode: <span style="color: ${this.isWireframe ? '#ffc107' : '#28a745'}">${this.isWireframe ? 'Wireframe' : 'Solid'}</span></div>
                 <div>FPS: <span style="color: #61dafb">~${Math.round(1000 / (performance.now() - this.lastTime + 1))}</span></div>
             `;
         }
