@@ -168,6 +168,26 @@ export interface CommonExampleInterface {
   keyboardCallback(key: number, state: number): boolean;
 
   /**
+   * Handle keyboard up events (optional)
+   */
+  keyboardCallbackUp?(key: number, state: number): boolean;
+
+  /**
+   * Handle special keyboard events (optional)
+   */
+  specialKeyboard?(key: number, state: number): boolean;
+
+  /**
+   * Handle special keyboard up events (optional)
+   */
+  specialKeyboardUp?(key: number, state: number): boolean;
+
+  /**
+   * Display callback for rendering (optional)
+   */
+  displayCallback?(): void;
+
+  /**
    * Handle VR controller movement (optional)
    */
   vrControllerMoveCallback?(
@@ -211,6 +231,11 @@ export interface CommonExampleInterface {
    * Process command line arguments (optional)
    */
   processCommandLineArgs?(argc: number, argv: string[]): void;
+
+  /**
+   * Get the dynamics world instance (optional but commonly used)
+   */
+  getDynamicsWorld?(): any;
 }
 
 /**
