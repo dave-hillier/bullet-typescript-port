@@ -80,17 +80,23 @@ class MockPoint2PointConstraint implements btPoint2PointConstraint {
     m_tau: 0
   };
 
+  private m_rigidBodyA: btRigidBody;
+  private m_localPivot: btVector3;
+
   constructor(body: btRigidBody, localPivot: btVector3) {
-    // Mock implementation
+    console.warn('Using mock btPoint2PointConstraint - constraint picking will not work properly');
+    this.m_rigidBodyA = body;
+    this.m_localPivot = localPivot.clone();
   }
 
   setPivotB(pivotB: btVector3): void {
-    // Mock implementation
+    // Mock implementation - would need proper constraint solving
+    console.debug('MockPoint2PointConstraint.setPivotB called - no actual constraint applied');
   }
 
   // Additional btTypedConstraint interface methods (minimal implementation)
-  getType(): number { return 0; }
-  getRigidBodyA(): btRigidBody { return null as any; }
+  getType(): number { return 3; } // POINT2POINT_CONSTRAINT_TYPE
+  getRigidBodyA(): btRigidBody { return this.m_rigidBodyA; }
   getRigidBodyB(): btRigidBody { return null as any; }
   setEnabled(enabled: boolean): void { }
   isEnabled(): boolean { return true; }
@@ -103,12 +109,22 @@ interface btDefaultSerializer {
 
 // Mock implementation for serializer
 class MockDefaultSerializer implements btDefaultSerializer {
+  private buffer: ArrayBuffer;
+
+  constructor() {
+    console.warn('Using mock btDefaultSerializer - serialization functionality not implemented');
+    // Create a minimal mock buffer
+    this.buffer = new ArrayBuffer(1024);
+  }
+
   getBufferPointer(): ArrayBuffer {
-    return new ArrayBuffer(0);
+    console.debug('MockDefaultSerializer.getBufferPointer called - returning empty buffer');
+    return this.buffer;
   }
 
   getCurrentBufferSize(): number {
-    return 0;
+    console.debug('MockDefaultSerializer.getCurrentBufferSize called');
+    return this.buffer.byteLength;
   }
 }
 
@@ -327,40 +343,41 @@ export class CommonRigidBodyBase implements CommonExampleInterface {
     const rayForward = camTarget.subtract(camPos);
     rayForward.normalize();
     const farPlane = 10000.0;
-    rayForward.scale(farPlane);
+    rayForward.multiplyAssign(farPlane);
 
     const cameraUp = new btVector3(0, 0, 0);
-    cameraUp.setValue(
-      this.m_guiHelper.getAppInterface().getUpAxis(),
-      1
-    );
+    // Set component at upAxis index to 1
+    const upAxis = this.m_guiHelper.getAppInterface().getUpAxis();
+    if (upAxis === 0) cameraUp.setValue(1, 0, 0);
+    else if (upAxis === 1) cameraUp.setValue(0, 1, 0);
+    else if (upAxis === 2) cameraUp.setValue(0, 0, 1);
 
     const vertical = cameraUp.clone();
 
     const hor = rayForward.cross(vertical);
     hor.safeNormalize();
-    vertical.assign(hor.cross(rayForward));
+    vertical.copy(hor.cross(rayForward));
     vertical.safeNormalize();
 
     const tanfov = Math.tan(0.5 * fov);
 
-    hor.scale(2.0 * farPlane * tanfov);
-    vertical.scale(2.0 * farPlane * tanfov);
+    hor.multiplyAssign(2.0 * farPlane * tanfov);
+    vertical.multiplyAssign(2.0 * farPlane * tanfov);
 
     const width = renderer.getScreenWidth();
     const height = renderer.getScreenHeight();
 
     const aspect = width / height;
 
-    hor.scale(aspect);
+    hor.multiplyAssign(aspect);
 
     const rayToCenter = rayFrom.add(rayForward);
-    const dHor = hor.scale(1.0 / width);
-    const dVert = vertical.scale(1.0 / height);
+    const dHor = hor.multiply(1.0 / width);
+    const dVert = vertical.multiply(1.0 / height);
 
-    const rayTo = rayToCenter.subtract(hor.scale(0.5)).add(vertical.scale(0.5));
-    rayTo.add(dHor.scale(x));
-    rayTo.subtract(dVert.scale(y));
+    const rayTo = rayToCenter.subtract(hor.multiply(0.5)).add(vertical.multiply(0.5));
+    rayTo.addAssign(dHor.multiply(x));
+    rayTo.subtractAssign(dVert.multiply(y));
     return rayTo;
   }
 
@@ -441,7 +458,9 @@ export class CommonRigidBodyBase implements CommonExampleInterface {
           this.m_savedState = this.m_pickedBody.getActivationState();
           this.m_pickedBody.setActivationState(DISABLE_DEACTIVATION);
 
-          const localPivot = body.getCenterOfMassTransform().inverse().multiply(pickPos);
+          // TODO: Replace with proper getCenterOfMassTransform when available
+          // For now, use world transform as approximation
+          const localPivot = (body as any).m_worldTransform.inverse().multiply(pickPos);
 
           // TODO: Use proper btPoint2PointConstraint when ported
           const p2p = new MockPoint2PointConstraint(body, localPivot);
@@ -455,8 +474,8 @@ export class CommonRigidBodyBase implements CommonExampleInterface {
         }
       }
 
-      this.m_oldPickingPos.assign(rayToWorld);
-      this.m_hitPos.assign(pickPos);
+      this.m_oldPickingPos.copy(rayToWorld);
+      this.m_hitPos.copy(pickPos);
       this.m_oldPickingDist = pickPos.subtract(rayFromWorld).length();
     }
     return false;
@@ -472,7 +491,7 @@ export class CommonRigidBodyBase implements CommonExampleInterface {
         // Keep it at the same picking distance
         const dir = rayToWorld.subtract(rayFromWorld);
         dir.normalize();
-        dir.scale(this.m_oldPickingDist);
+        dir.multiplyAssign(this.m_oldPickingDist);
 
         const newPivotB = rayFromWorld.add(dir);
         pickCon.setPivotB(newPivotB);

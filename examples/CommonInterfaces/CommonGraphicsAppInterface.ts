@@ -292,6 +292,10 @@ export class BaseCommonGraphicsApp implements CommonGraphicsApp {
     if (this.m_window && this.m_renderer) {
       const camera = this.m_renderer.getActiveCamera();
 
+      if (!camera) {
+        return; // No camera available
+      }
+
       const isAltPressed = this.m_window.isModifierKeyPressed(B3G_ALT);
       const isControlPressed = this.m_window.isModifierKeyPressed(B3G_CONTROL);
 
@@ -359,6 +363,10 @@ export class BaseCommonGraphicsApp implements CommonGraphicsApp {
       const cameraUp = b3MakeVector3(0, 0, 0);
       cameraUp.set(this.getUpAxis(), 1);
       const camera = this.m_renderer.getActiveCamera();
+
+      if (!camera) {
+        return; // No camera available
+      }
 
       const camPos: [number, number, number] = [0, 0, 0];
       const targPos: [number, number, number] = [0, 0, 0];
