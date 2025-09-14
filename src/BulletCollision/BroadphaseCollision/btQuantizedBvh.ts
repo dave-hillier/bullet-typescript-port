@@ -379,6 +379,22 @@ export class btQuantizedBvh {
     }
 
     /**
+     * Get the BVH minimum AABB bounds
+     * @returns Minimum bounds
+     */
+    public getBvhAabbMin(): btVector3 {
+        return this.m_bvhAabbMin;
+    }
+
+    /**
+     * Get the BVH maximum AABB bounds
+     * @returns Maximum bounds
+     */
+    public getBvhAabbMax(): btVector3 {
+        return this.m_bvhAabbMax;
+    }
+
+    /**
      * Report all nodes overlapping with the given AABB
      * @param nodeCallback Callback to process overlapping nodes
      * @param aabbMin Minimum bounds of query AABB

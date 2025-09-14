@@ -18,6 +18,8 @@ subject to the following restrictions:
 */
 
 import { btVector3 } from '../../LinearMath/btVector3';
+import { btMatrix3x3 } from '../../LinearMath/btMatrix3x3';
+import { btFabs, btNormalizeAngle, SIMD_2_PI, SIMD_EPSILON, BT_LARGE_FLOAT, SIMD_PI, SIMD_HALF_PI } from '../../LinearMath/btScalar';
 
 // Forward declaration to avoid circular dependency
 export interface btRigidBody {
@@ -196,4 +198,84 @@ export abstract class btTypedConstraint {
         // Basic implementation - can be overridden by subclasses
         return 1.0;
     }
+
+    // Static method for getting fixed body (placeholder implementation)
+    static getFixedBody(): any {
+        // This should return a static rigid body instance
+        // For now, return a placeholder object
+        return {
+            getCenterOfMassTransform: () => ({
+                mul: (other: any) => other,
+                getOrigin: () => new btVector3(0, 0, 0)
+            })
+        };
+    }
+}
+
+// Utility functions used by constraints
+
+/**
+ * Adjust angle to limits helper function
+ */
+export function btAdjustAngleToLimits(angleInRadians: number, angleLowerLimitInRadians: number, angleUpperLimitInRadians: number): number {
+    if (angleLowerLimitInRadians >= angleUpperLimitInRadians) {
+        return angleInRadians;
+    } else if (angleInRadians < angleLowerLimitInRadians) {
+        const diffLo = btFabs(btNormalizeAngle(angleLowerLimitInRadians - angleInRadians));
+        const diffHi = btFabs(btNormalizeAngle(angleUpperLimitInRadians - angleInRadians));
+        return (diffLo < diffHi) ? angleInRadians : (angleInRadians + SIMD_2_PI);
+    } else if (angleInRadians > angleUpperLimitInRadians) {
+        const diffHi = btFabs(btNormalizeAngle(angleInRadians - angleUpperLimitInRadians));
+        const diffLo = btFabs(btNormalizeAngle(angleInRadians - angleLowerLimitInRadians));
+        return (diffLo < diffHi) ? (angleInRadians - SIMD_2_PI) : angleInRadians;
+    } else {
+        return angleInRadians;
+    }
+}
+
+/**
+ * Get matrix element helper function
+ */
+export function btGetMatrixElem(mat: btMatrix3x3, index: number): number {
+    const i = index % 3;
+    const j = Math.floor(index / 3);
+    const row = mat.getRow(i);
+    return j === 0 ? row.getX() : (j === 1 ? row.getY() : row.getZ());
+}
+
+/**
+ * Matrix to Euler XYZ conversion
+ */
+export function matrixToEulerXYZ(mat: btMatrix3x3, xyz: btVector3): boolean {
+    // rot =  cy*cz          -cy*sz           sy
+    //        cz*sx*sy+cx*sz  cx*cz-sx*sy*sz -cy*sx
+    //       -cx*cz*sy+sx*sz  cz*sx+cx*sy*sz  cx*cy
+
+    const fi = btGetMatrixElem(mat, 2);
+    if (fi < 1.0) {
+        if (fi > -1.0) {
+            xyz.setValue(
+                Math.atan2(-btGetMatrixElem(mat, 5), btGetMatrixElem(mat, 8)),
+                Math.asin(btGetMatrixElem(mat, 2)),
+                Math.atan2(-btGetMatrixElem(mat, 1), btGetMatrixElem(mat, 0))
+            );
+            return true;
+        } else {
+            // WARNING.  Not unique.  XA - ZA = -atan2(r10,r11)
+            xyz.setValue(
+                -Math.atan2(btGetMatrixElem(mat, 3), btGetMatrixElem(mat, 4)),
+                -SIMD_HALF_PI,
+                0.0
+            );
+            return false;
+        }
+    } else {
+        // WARNING.  Not unique.  XAngle + ZAngle = atan2(r10,r11)
+        xyz.setValue(
+            Math.atan2(btGetMatrixElem(mat, 3), btGetMatrixElem(mat, 4)),
+            SIMD_HALF_PI,
+            0.0
+        );
+    }
+    return false;
 }

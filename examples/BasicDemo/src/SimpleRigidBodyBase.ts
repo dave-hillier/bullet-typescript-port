@@ -77,7 +77,28 @@ export abstract class SimpleRigidBodyBase implements CommonExampleInterface {
 
     public stepSimulation(deltaTime: number): void {
         if (this.m_dynamicsWorld) {
+            // Debug physics stepping occasionally
+            if (Math.random() < 0.01) { // 1% chance
+                console.log(`stepSimulation called with deltaTime: ${deltaTime.toFixed(4)}`);
+                console.log(`Physics world has ${this.m_dynamicsWorld.getNumCollisionObjects()} objects`);
+
+                // Log some object velocities and positions
+                const objects = this.m_dynamicsWorld.getCollisionObjectArray();
+                const dynamicObjects = objects.filter((obj: any) => {
+                    const body = obj as any;
+                    return body && body.getMass && body.getMass() > 0;
+                });
+
+                if (dynamicObjects.length > 0) {
+                    const body = dynamicObjects[0] as any;
+                    const pos = body.getWorldTransform().getOrigin();
+                    const vel = body.getLinearVelocity ? body.getLinearVelocity() : 'no vel method';
+                    console.log(`First dynamic body: pos=(${pos.x().toFixed(2)}, ${pos.y().toFixed(2)}, ${pos.z().toFixed(2)}), vel=${vel}`);
+                }
+            }
             this.m_dynamicsWorld.stepSimulation(deltaTime);
+        } else {
+            console.warn("stepSimulation called but m_dynamicsWorld is null");
         }
     }
 
@@ -162,6 +183,13 @@ export abstract class SimpleRigidBodyBase implements CommonExampleInterface {
             const fixedTransform = body.getWorldTransform();
             const fixedOrigin = fixedTransform.getOrigin();
             console.log(`Fixed transform: (${fixedOrigin.x().toFixed(1)}, ${fixedOrigin.y().toFixed(1)}, ${fixedOrigin.z().toFixed(1)})`);
+        }
+
+        // For dynamic bodies, ensure they're active and not sleeping
+        if (isDynamic) {
+            body.setActivationState(1); // ACTIVE_TAG = 1
+            body.forceActivationState(1);
+            console.log(`Set dynamic body as active with mass: ${mass}`);
         }
 
         if (this.m_dynamicsWorld) {

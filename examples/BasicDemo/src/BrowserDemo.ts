@@ -243,19 +243,27 @@ export class BrowserDemo {
         try {
             // Step the physics simulation
             this.example.stepSimulation(Math.min(deltaTime, 1/30)); // Cap at 30fps for stability
-            
+
             // Render the 3D scene
             this.example.renderScene();
             this.guiHelper.render();
-            
+
             this.frameCount++;
-            
+
             // Update info every 60 frames
             if (this.frameCount % 60 === 0) {
                 this.updateInfo();
                 this.logObjectPositions();
             }
-            
+
+            // Debug physics stepping occasionally
+            if (this.frameCount % 120 === 0) { // Every 2 seconds at 60fps
+                const world = this.example.getDynamicsWorld ? this.example.getDynamicsWorld() : null;
+                if (world) {
+                    console.log(`Physics step ${this.frameCount}: ${world.getNumCollisionObjects()} objects, deltaTime: ${deltaTime.toFixed(4)}`);
+                }
+            }
+
         } catch (error) {
             this.log(`❌ Simulation error: ${error}`);
             console.error(error);
@@ -268,7 +276,7 @@ export class BrowserDemo {
     }
 
     private logObjectPositions(): void {
-        const world = this.example.getDynamicsWorld && this.example.getDynamicsWorld();
+        const world = this.example.getDynamicsWorld ? this.example.getDynamicsWorld() : null;
         if (!world) return;
 
         const objects = world.getCollisionObjectArray();
@@ -276,6 +284,8 @@ export class BrowserDemo {
             const body = obj as btRigidBody;
             return body && body.getMass && body.getMass() > 0;
         });
+
+        console.log(`Total objects: ${objects.length}, Dynamic objects: ${dynamicObjects.length}`);
 
         if (dynamicObjects.length > 0) {
             // Log first few dynamic objects
@@ -286,10 +296,22 @@ export class BrowserDemo {
                 const body = dynamicObjects[i] as btRigidBody;
                 const transform = body.getWorldTransform();
                 const origin = transform.getOrigin();
-                positionInfo += `[${i}](${origin.x().toFixed(2)}, ${origin.y().toFixed(2)}, ${origin.z().toFixed(2)}) `;
+                const mass = body.getMass ? body.getMass() : 'unknown';
+                positionInfo += `[${i}](${origin.x().toFixed(2)}, ${origin.y().toFixed(2)}, ${origin.z().toFixed(2)}, m=${mass}) `;
             }
 
             this.log(positionInfo);
+
+            // Check if objects are actually moving
+            if (this.frameCount > 120) { // After 2 seconds
+                const firstBody = dynamicObjects[0] as btRigidBody;
+                const pos = firstBody.getWorldTransform().getOrigin();
+                if (Math.abs(pos.y() - 3.0) < 0.1) { // Still near starting Y position
+                    console.warn("⚠️ Objects don't seem to be falling! Y position still near starting position:", pos.y());
+                }
+            }
+        } else {
+            console.warn("⚠️ No dynamic objects found in physics world!");
         }
     }
 }

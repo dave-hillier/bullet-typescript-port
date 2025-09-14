@@ -25,6 +25,7 @@ import { btConstraintSolver } from '../ConstraintSolver/btConstraintSolver';
 // import { btSimulationIslandManager } from '../../BulletCollision/CollisionDispatch/btSimulationIslandManager'; // Temporarily disabled
 import { btRigidBody } from './btRigidBody';
 import { btVector3 } from '../../LinearMath/btVector3';
+import { btTransform } from '../../LinearMath/btTransform';
 import { btActionInterface } from './btActionInterface';
 import { btContactSolverInfo } from '../ConstraintSolver/btContactSolverInfo';
 import { btCollisionObject } from '../../BulletCollision/CollisionDispatch/btCollisionObject';
@@ -209,10 +210,14 @@ export class btDiscreteDynamicsWorld extends btDynamicsWorld {
 
   protected integrateTransforms(timeStep: number): void {
     // Integrate transforms for all non-static rigid bodies
+    const predictedTrans = new btTransform();
     for (const body of this.m_nonStaticRigidBodies) {
       if (body.isActive() && !body.isStaticOrKinematicObject()) {
-        if (body.integrateVelocities) {
-          body.integrateVelocities(timeStep);
+        // Predict integrated transform (position integration)
+        if (body.predictIntegratedTransform) {
+          body.predictIntegratedTransform(timeStep, predictedTrans);
+          // Apply the predicted transform to update the body's position
+          body.proceedToTransform(predictedTrans);
         }
       }
     }
