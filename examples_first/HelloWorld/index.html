@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bullet3 HelloWorld - TypeScript Port</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .console-output {
+        background: rgba(0,0,0,0.8);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        text-align: left;
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .controls {
+        margin: 20px 0;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      button {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s ease;
+      }
+
+      button:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .status {
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      .status.running { color: #4ade80; }
+      .status.stopped { color: #f87171; }
+      .status.complete { color: #60a5fa; }
+
+      .info {
+        background: rgba(255,255,255,0.1);
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        font-size: 12px;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🌍 Bullet3 HelloWorld</h1>
+      <p class="subtitle">TypeScript Port of the Classic Physics Demo</p>
+
+      <div class="info">
+        This is a port of the original Bullet3 HelloWorld example. It demonstrates basic physics simulation with a falling sphere and ground plane. The simulation runs for 150 steps and outputs object positions to the console below.
+      </div>
+
+      <div class="status" id="status">Ready to start</div>
+
+      <div class="controls">
+        <button id="start-btn" onclick="window.helloWorld?.start()">Start Simulation</button>
+        <button id="stop-btn" onclick="window.helloWorld?.stop()" disabled>Stop</button>
+        <button id="reset-btn" onclick="window.helloWorld?.reset()">Reset</button>
+        <button onclick="document.getElementById('console-output').innerHTML = ''">Clear Console</button>
+      </div>
+
+      <div id="console-output" class="console-output">
+        <div style="color: #60a5fa;">🚀 Bullet3 HelloWorld Demo Ready</div>
+        <div style="color: #9ca3af;">Click "Start Simulation" to begin...</div>
+      </div>
+
+      <div class="footer">
+        <p>Original C++ implementation by Erwin Coumans • TypeScript port using Bullet3 physics engine</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

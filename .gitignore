@@ -59,3 +59,5 @@ tmp/
 temp/
 
 node_modules
+*storybook.log
+storybook-static
